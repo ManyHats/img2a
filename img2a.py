@@ -1,10 +1,16 @@
 from PIL import Image
+import sys
 
-# TODO: Add command line argument file input
 def main():
-    img = Image.open("index.png").convert("LA")
+    img = get_file()
     print_characters(img)
 
+def get_file():
+    if len(sys.argv) != 2:
+        print("Usage: $ python img2a.py {Path/to/file}")
+        sys.exit()
+    else:
+        return Image.open(sys.argv[1]).convert("LA")
 
 def print_characters(img):
     x = 0
