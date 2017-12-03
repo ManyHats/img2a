@@ -1,5 +1,6 @@
-from PIL import Image
 import sys
+from PIL import Image
+
 
 def main():
     img = get_file()
@@ -57,9 +58,9 @@ def print_characters(img):
                 f.write(' ')
                 f.write(' ')
 
-            x += 1  # Add 1 to X for each pixel looped through
+            x += 1
 
-            if x == (img.size[0]):  # If loop reaches width of image
+            if x == (img.size[0]):
                 y += 1
                 x = 0
                 f.write('\n')
