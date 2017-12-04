@@ -4,14 +4,26 @@ from PIL import Image
 
 def main():
     img = get_file()
+    resize(img)
     print_characters(img)
 
+
 def get_file():
-    if len(sys.argv) != 2:
-        print("Usage: $ python img2a.py {Path/to/file}")
+    if len(sys.argv) < 2 or len(sys.argv) > 3:
+        print("Usage: $ python img2a.py {Path/to/file} OPTIONAL: {New Width}")
         sys.exit()
     else:
         return Image.open(sys.argv[1]).convert("LA")
+
+
+def resize(img):
+    if len(sys.argv) == 3:
+        width = int(sys.argv[2])
+        ratio = img.size[0] / img.size[1]
+        height = width / ratio
+        size = (width, height)
+        img.thumbnail(size)
+
 
 def print_characters(img):
     x = 0
@@ -65,6 +77,7 @@ def print_characters(img):
                 x = 0
                 f.write('\n')
         f.close()
+        print("Done!\n(If output is too big, try supplying a new Width argument after path)")
 
 
 if __name__ == "__main__":
